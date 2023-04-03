@@ -3,117 +3,93 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 import { Avatar, Grid, Typography } from '@mui/material';
+import  { useState } from 'react';
+
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 
 
 
-  // Define custom renderer for "Autho" column
-  const AuthorRenderer = ({ value }) => (
-    <Grid container alignItems="center" spacing={2}>
-      <Grid item>
-        <Avatar src={value.avatarUrl} alt={value.name} />
-      </Grid>
-      <Grid item>
-        <Typography variant="subtitle2">{value.name}</Typography>
-      </Grid>
+const AuthorRenderer = ({ value }) => (
+  <Grid container alignItems="center" spacing={2}>
+    <Grid item>
+      <Avatar src={value.avatarUrl} alt={value.name} />
     </Grid>
-  );
+    <Grid item>
+      <Typography variant="subtitle2">{value.name}</Typography>
+    </Grid>
+  </Grid>
+);
 
-const columns: GridColDef[] = [
-    { field: 'autho', headerName: 'Autho', width: 200, renderCell: AuthorRenderer },
-    { field: 'function', headerName: 'Function', width: 150,editable: true },
-    { field: 'status', headerName: 'Status', width: 150,editable: true },
-    { field: 'employeed', headerName: 'Employeed', width: 150,editable: true },
-     { field: 'action', headerName: 'Action', width: 150,editable: true,
-    valueGetter: (params: GridValueGetterParams) =>
-      ` ${params.row.action || ''}`,
-  },
-];
-
-const rows = [
-    {
-      id: 1,
-      autho: { name: 'John Doe', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-      function: 'Manager',
-      status: 'Active',
-      employeed: '2020-01-01',
-      action: 'Edit',
-    
-    },
-    {
-        id: 2,
-        autho: { name: 'John', avatarUrl: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-      {
-        id: 3,
-        autho: { name: 'John', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-      {
-        id: 4,
-        autho: { name: 'John', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-      {
-        id: 5,
-        autho: { name: 'John', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-      {
-        id: 6,
-        autho: { name: 'John', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-      {
-        id: 7,
-        autho: { name: 'John', avatarUrl: 'https://i.pravatar.cc/48?img=1' },
-        function: 'Manager',
-        status: 'Active',
-        employeed: '2020-01-01',
-        action: 'Edit',
-      
-      },
-
-]
 export default function DataGridDemo() {
+
+  const [pagination, setPagination] = useState({
+    pageSize: 30,
+    page: 0,
+  });
+
+
+  const { isLoading, error, data, isError } = useQuery(['projects',pagination], () =>
+    axios.get('http://localhost:5000/api/authors/authortable', {
+      params: {
+        pagenumber: pagination.page,
+        rowsPerPage: pagination.pageSize
+      }
+    }).then(response => response.data)
+  );
+console.log(data)
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <div>Error: {error.message}</div>;
+
+  const columns: GridColDef[] = [
+
+    { field: 'Author', headerName: 'Author', width: 200, renderCell: AuthorRenderer },
+    { field: 'Function', headerName: 'Function', width: 150, editable: true },
+    { field: 'status', headerName: 'Status', width: 150, editable: true },
+    { field: 'Employeed', headerName: 'Employeed', width: 150, editable: true },
+    {
+      field: 'action', headerName: 'Action', width: 150, editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        ` ${params.row.action || ''}`,
+    },
+  ];
+
+  const rowsdata = data && Array.isArray(data.data.users) ? data.data.users.map((user) => ({
+    id: user.id,
+    Author: { name: user.Author, avatarUrl: user.avatar },
+    Function: user.Function,
+    status: user.status,
+    Employeed: user.Employeed,
+    action:'Edit'
+  })) : [];
+  console.log('this is ', rowsdata);
+  
+
   return (
     <Box sx={{ height: 400, width: '100%' }}>
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      disableColumnMenu
-      initialState={{
-        pagination: {
-          paginationModel: {
-            pageSize: 5,
-          },
-        },
-      }}
-      pageSizeOptions={[5]}
-      checkboxSelection
-      disableRowSelectionOnClick
-    />
-  </Box>
+      {isLoading ? (
+        <Typography>Loading...</Typography>
+      ) : isError ? (
+        <Typography>Error</Typography>
+      ) : (
+        <DataGrid
+  rows={rowsdata}
+  columns={columns}
+  disableColumnMenu
+  
+  pageSizeOptions={[3, 5, 30]}
+  checkboxSelection
+  disableRowSelectionOnClick
+  
+  paginationModel={pagination}
+  onPaginationModelChange={setPagination}
+
+  
+/>
+      )}
+    </Box>
   );
 }
