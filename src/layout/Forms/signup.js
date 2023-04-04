@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Card, CardContent } from "@mui/material";
+import { useMutation } from 'react-query';
+import axios from 'axios';
 
 
 import { styled } from '@mui/system';
@@ -40,15 +42,37 @@ const MyComponent2 = styled('div')({
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+export default function Signup() {
+
+  const signUpMutation = useMutation(async ({ name,email, password }) => {
+    const response = await axios.post('http://localhost:5000/api/users/signup', {name,email, password });
+    console.log('this is data', response.data);
+    return response.data;
+ 
+  });
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    signUpMutation.mutate({
+      name:data.get('name'),
       email: data.get('email'),
-      password: data.get('password'),
+      password: data.get('password')
     });
+    if (signUpMutation.isLoading) {
+      return alert("signup....")
+    }
+    
+    if (signUpMutation.isError) {
+     
+      return alert("email is already registered")
+    }
+    
+    if (signUpMutation.isSuccess) {
+      return alert("succefully signup")
+    }
   };
+
 
   return (
 

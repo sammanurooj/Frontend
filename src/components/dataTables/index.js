@@ -22,7 +22,7 @@ const AuthorRenderer = ({ value }) => (
   </Grid>
 );
 
-export default function DataGridDemo() {
+export default function DataGridDemoAuthor() {
 
   const [pagination, setPagination] = useState({
     pageSize: 30,
