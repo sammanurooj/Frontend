@@ -38,7 +38,7 @@ export default function DataGridDemo() {
       }
     }).then(response => response.data)
   );
-console.log(data)
+console.log("table data",data)
 
   if (isLoading) return <div>Loading...</div>;
 

@@ -32,6 +32,7 @@ interface Props {
 export default function ResponsiveDrawer(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isLoggedIn = localStorage.getItem('token') !== null;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -118,36 +119,31 @@ export default function ResponsiveDrawer(props: Props) {
       </ListItem>
       </List>
       
+      {!isLoggedIn && (
       <List>
-      <ListItem>
-      <ListItemButton Link to="/signin">
-      <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
-
-      </ListItemIcon>
-      <ListItemText primary={"Signin"} />
-
-      </ListItemButton>
-
-
-
-      </ListItem>
+        <ListItem>
+          <ListItemButton Link to="/signin">
+            <ListItemIcon>
+              <InboxIcon style={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={"Signin"} />
+          </ListItemButton>
+        </ListItem>
       </List>
+    )}
+
+    {!isLoggedIn && (
       <List>
-      <ListItem>
-      <ListItemButton Link to="/signup">
-      <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
-
-      </ListItemIcon>
-      <ListItemText primary={"SignUp"} />
-
-      </ListItemButton>
-
-
-
-      </ListItem>
+        <ListItem>
+          <ListItemButton Link to="/signup">
+            <ListItemIcon>
+              <InboxIcon style={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={"SignUp"} />
+          </ListItemButton>
+        </ListItem>
       </List>
+    )}
 
       <Divider />
       
@@ -162,6 +158,7 @@ export default function ResponsiveDrawer(props: Props) {
 
     </div>
   );
+
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (

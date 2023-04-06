@@ -9,10 +9,37 @@ import IMage from  '../../images/profile.png'
 import Pcard from '../../Container/profileCard/index'
 
 import { Box , useTheme } from '@mui/material';
+import  { useState } from 'react';
+
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 function App() {
     const theme = useTheme();
-  
+
+    const { isLoading, error,data } = useQuery('userData', () =>
+    axios.get('http://localhost:5000/api/users/applicationusers')
+      .then(response => response.data)
+  );
+  console.log("this is profile data",data)
+ 
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <div>Error: {error.message}</div>;
+
+
+  const rowsData = data && Array.isArray(data.data.users.rows) ? data.data.users.rows.map((user) => ({
+    id: user.id,
+    name: user.name,
+    bio: user.Bio,
+    phone:user.Phone,
+    Location:user.Location,
+    email:user.email
+
+  })) : [];
+  const secondRow = rowsData[3];
+  console.log("data.users", data.data.users.rows);
+console.log("formated data",rowsData[3])
   return (
  
    <>
@@ -65,8 +92,8 @@ function App() {
         <h4>Application</h4>
 
         <Box display="flex" flexDirection="row" ml={4}>
-        
-     
+
+       
         <FormGroup>
     
         <FormControlLabel control={<Switch defaultChecked />} label="
@@ -90,6 +117,9 @@ Subscribe to newsletter" />
 
         <Box display="flex" flexDirection="column" mt={5}>
 
+       
+
+
      
         <Box display="flex" flexDirection="column" >
          
@@ -99,22 +129,30 @@ Subscribe to newsletter" />
 
         </Box>
          
-         
-         <p>
-         Hi, I’m Alec Thompson, Decisions: If you can’t decide,<br/>the answer is no. If two equally difficult <br/>paths, choose the one more painful in the short term <br/> (pain avoidance is creating an illusion of equality).
-         </p>
+        
+        <div>
 
-   
+        <p>{secondRow.bio}</p>
+    {/* {rowsData[3].length > 0 ? (
+      rowsData[3].map((user) => (
+        <p id={`user-${user.id}`} key={user.id}>
+          {user.name}: {user.bio}
+        </p>
+      ))
+    ) : (
+      <div>No data to display.</div>
+    )} */}
+  </div>
 
        <Box >
         <p>Full Name:  
- Alec M. Thompson</p>
+        {secondRow.name}</p>
         <p>Mobile:  
- (44) 123 1234 123</p>
+{secondRow.phone}</p>
  <p>Email:  
- alecthompson@mail.com</p>
+ {secondRow.email}</p>
  <p>Location:  
- USA</p>
+ {secondRow.Location}</p>
        </Box>
 
         </Box>
@@ -135,35 +173,15 @@ Subscribe to newsletter" />
        <TableContainer>
   <Table sx={{ borderCollapse: 'collapse' }}>
     <TableBody>
-      <TableRow>
-        <TableCell sx={{ py: 2 }}>
-          <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
-          <span style={{ marginLeft: '10px' }}>John Doe</span>
-        </TableCell>
-        <TableCell sx={{ py: 2 }}>Reply</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell sx={{ py: 2 }}>
-        <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
-          <span style={{ marginLeft: '10px' }}>John Doe</span>
-        </TableCell>
-        <TableCell sx={{ py: 2 }}>Reply</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell sx={{ py: 2 }}>
-        <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
-          <span style={{ marginLeft: '10px' }}>John Doe</span>
-        </TableCell>
-        <TableCell sx={{ py: 2 }}>Reply</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell sx={{ py: 2 }}>
-        <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
-          <span style={{ marginLeft: '10px' }}>John Doe</span>
-        </TableCell>
-        <TableCell sx={{ py: 2 }}>Reply</TableCell>
-      </TableRow>
-      
+      {rowsData.map((user) => (
+        <TableRow key={user.id}>
+          <TableCell sx={{ py: 2 }}>
+            <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
+            <span style={{ marginLeft: '10px' }}>{user.name}</span>
+          </TableCell>
+          <TableCell sx={{ py: 2 }}>Reply</TableCell>
+        </TableRow>
+      ))}
     </TableBody>
   </Table>
 </TableContainer>
