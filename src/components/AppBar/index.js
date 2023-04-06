@@ -18,7 +18,7 @@ const LightAppBar = styled(AppBar)({
 
 
 });
-const iconButtonStyle = { fontSize: '1.5rem', padding: 0 };
+const iconButtonStyle = { fontSize: '1.5rem', padding: 2,marginLeft: '0.5rem' };
 
 const textStyle = { fontSize: '1rem', marginLeft: '0.5rem' };
 export default function MyAppBar() {
@@ -26,22 +26,8 @@ export default function MyAppBar() {
     <Container maxWidth='lg'>
     <LightAppBar position="static" sx={{borderRadius:2}}>
       <Toolbar>
-      <Link to="/">
-        <IconButton  style={iconButtonStyle}>
-          <DashboardIcon  />
-        </IconButton>
-        </Link>
-        <Typography variant="h6" component="div" style={textStyle}  >
-          Dashboard
-        </Typography>
-        <Link to="/profile">
-        <IconButton Link to="/profile">
-          <PersonIcon />
-        </IconButton>
-        </Link>
-        <Typography variant="h6" component="div" style={textStyle} >
-          Profile
-        </Typography>
+      
+        
         <Link to="/signup">
         <IconButton  style={iconButtonStyle}>
           <CreateIcon />
@@ -53,7 +39,7 @@ export default function MyAppBar() {
 
         <Link to="/signin">
 
-        
+  
         <IconButton  style={iconButtonStyle}>
           <ExitToAppIcon />
         </IconButton>

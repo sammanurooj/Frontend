@@ -16,8 +16,11 @@ import { Card, CardContent } from "@mui/material";
 import { useMutation } from 'react-query';
 import axios from 'axios';
 
+import { useNavigate } from "react-router-dom";
+
 
 import { styled } from '@mui/system';
+
 
 
 const MyComponent2 = styled('div')({
@@ -43,6 +46,7 @@ const MyComponent2 = styled('div')({
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
 
   const signInMutation = useMutation(async ({ email, password }) => {
     const response = await axios.post('http://localhost:5000/api/users/signin', { email, password});
@@ -67,6 +71,7 @@ export default function SignIn() {
       localStorage.setItem('this is token', response.data.token);
   
       alert('Successfully logged in');
+      navigate("/mainpage");
     } catch (error) {
       alert('Invalid email and password');
     }
@@ -131,7 +136,7 @@ export default function SignIn() {
               Sign In
             </Button>
             <Box sx={{ alignItems: 'center'}}>
-            <Link href="#" variant="body2">
+            <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
             </Box>
