@@ -1,7 +1,7 @@
 
 
 import './App.css';
-import Routing from './Routes/index'
+import Routing from './routes/index'
 import { QueryClient, QueryClientProvider} from 'react-query'
 import Todo from './reactQuerry/index'
 //import PostTodo from './reactQuerry/postData'

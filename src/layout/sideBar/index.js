@@ -17,7 +17,8 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import Toolbar from '@mui/material/Toolbar';
-//import { Link } from 'react-router-dom';
+import {  useNavigate} from 'react-router-dom';
+
 
 const drawerWidth = 250;
 
@@ -32,11 +33,16 @@ interface Props {
 export default function ResponsiveDrawer(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isLoggedIn = localStorage.getItem('token') !== null;
+  const isLoggedIn = localStorage.getItem('token') == null;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+
+  
+
+   
   const drawer = (
     <div style={{ zIndex: 0, backgroundColor: '#071e26', color: 'white', borderRadius: '10px',height:'1000px' }}>
       <Toolbar />
@@ -147,7 +153,6 @@ export default function ResponsiveDrawer(props: Props) {
 
       <Divider />
       
-
       <Divider />
 
  

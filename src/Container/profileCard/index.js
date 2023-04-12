@@ -1,69 +1,102 @@
+import { Box, useTheme } from '@mui/material';
 import ProfileCard from '../../components/profileCard/index';
+import ProjectForm from '../../layout/Forms/editProject';
+import { useMutation, useQuery } from 'react-query';
+import axios from 'axios';
 
-import { Box ,useTheme } from '@mui/material';
-import PC1 from '../../images/PC1.jpg';
-import PC2 from '../../images/pc2.jpg';
-import PC3 from '../../images/pc3.jpg';
-import PC4 from '../../images/pc4.jpeg';
-
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function App() {
+  const [editData, setEditData] = useState(null);
+ 
+ 
   const theme = useTheme();
-  return (
+  const token = localStorage.getItem('this is token');
+  const navigate = useNavigate();
+  const { isLoading, error, data, refetch } = useQuery('cardData', () =>
+    axios
+      .get('http://localhost:5000/api/userproject/project', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data)
+  );
+
   
-    <>
-    <Box sx={{
-  display: 'flex',
-  flexDirection: { xs: 'column', sm: 'column', md: 'row' },
-  gap: '16px',
-  [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
-    '& > div': {
-      width: '100%'
+
+  const deleteProject = useMutation(
+    (id) =>
+      axios.delete(`http://localhost:5000/api/userproject/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    {
+      onSuccess: () => {
+        console.log('Project deleted successfully');
+        refetch();
+      },
     }
-  }
-}}>
-    <Box >
-    <ProfileCard 
-           image= {PC1}
-        title="Modern"
-       
- 
-        description="As Uber works through a huge amount of internal  turmoil."
-      />
-    </Box>
-    <Box>
-    <ProfileCard 
-         image ={PC2}
-        title=" Scandinavian"
-    
-        description="Music is something that everyone has their own specific opinion about."
-      />
-    </Box>
-    
-   <Box>
-   <ProfileCard 
-        image={PC3}
-        title="Minimalist"
+  );
+  const handleEditProject = (rowData) => {
   
-    
-        description="Different people have different taste, and various types of music."
-      />
-   </Box>
-     
-       <Box>
-       <ProfileCard 
-        image={PC4}
-        title="Gothic"
-     
- 
-        description=" Why would anyone pick blue over pink? Pink is obviously a better color."
-      />
-       </Box>
-     
-   </Box>
-   
+    navigate(`/edit/${rowData.id}`);
+  };
+  const  handlepreviewProject= (rowData) => {
+  
+    navigate(`/preview/${rowData.id}`);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const cardData =
+    data && Array.isArray(data.data.users.rows)
+      ? data.data.users.rows.map((user) => ({
+          id: user.id,
+          pic: user.pic,
+          title: user.title,
+          description: user.description,
+        }))
+      : [];
+
+
+  console.log('editData', editData);
+  return (
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+          gap: '16px',
+          [theme.breakpoints.down('md')]: {
+            flexDirection: 'column',
+            '& > div': {
+              width: '100%',
+            },
+          },
+        }}
+      >
+        {cardData.map((rowData) => (
+          <Box key={rowData.id}>
+            <ProfileCard
+              image={rowData.pic}
+              title={rowData.title}
+              description={rowData.description}
+              deleteProject={() => deleteProject.mutate(rowData.id)}
+              editProject={() => handleEditProject(rowData)}
+              previewProject={() => handlepreviewProject(rowData)}
+            />
+          </Box>
+        ))}
+
+
+
+      </Box>
+
     </>
   );
-};
+}
+
 export default App;
