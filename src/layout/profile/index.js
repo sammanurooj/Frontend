@@ -7,9 +7,10 @@ import Switch from '@mui/material/Switch';
 import { Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import IMage from  '../../images/profile.png'
 import Pcard from '../../Container/profileCard/index'
-
+import Button from '@mui/material/Button';
 import { Box , useTheme } from '@mui/material';
 import  { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 
 import { useQuery } from 'react-query';
 import axios from 'axios';
@@ -45,12 +46,12 @@ console.log("formated data",rowsData[3])
    <>
 
    
-<Container maxWidth="lg" sx={{ height: { xs: '40vh', sm: '50vh', md: '60vh' }, marginTop: { xs: '10px', sm: '20px', md: '30px' }, backgroundImage: 'url("https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg")', backgroundSize: 'cover', borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+<Container maxWidth="lg" sx={{ height: { xs: '40vh', sm: '50vh', md: '50vh' }, marginTop: { xs: '10px', sm: '20px', md: '30px' }, backgroundImage: 'url("https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg")', backgroundSize: 'cover', borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
        
         </Container>
 
-<Container maxWidth="lg" sx={{ bgcolor: 'rgb(255, 255, 255)', height: { xs: '410vh', sm: '500vh', md: '115vh' } ,borderRadius:'16px',boxShadow: 3 }}>
+<Container maxWidth="lg" sx={{ bgcolor: 'rgb(255, 255, 255)', height: { xs: '410vh', sm: '500vh', md: '160vh' } ,borderRadius:'16px',boxShadow: 3 }}>
 
 
         <Box display ="flex" flexDirection="column"  justifyContent='space-between' >
@@ -195,12 +196,33 @@ Subscribe to newsletter" />
 
         </Box>
 
+        <Button 
+  href="/createproject" 
+  variant="contained" 
+  sx={{ 
+    width: '150px', 
+   
+    textTransform: 'none',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: '16px'
+  }}
+>
+    <AddIcon sx={{ fontSize: '24px'}}/>
+  <span>Create project</span> 
+
+</Button>
 
 <Box display="flex" flexDirection="row" ml={1}>
 <h4>projects</h4>
 <br/>
 
+
+
 </Box>
+
+
 
 <Box display="flex" flexDirection="row" justifyContent='space-between'>
 

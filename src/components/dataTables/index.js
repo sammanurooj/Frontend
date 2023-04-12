@@ -29,13 +29,17 @@ export default function DataGridDemoAuthor() {
     page: 0,
   });
 
-
+  const token = localStorage.getItem('this is token');
   const { isLoading, error, data, isError } = useQuery(['projects',pagination], () =>
     axios.get('http://localhost:5000/api/authors/authortable', {
       params: {
         pagenumber: pagination.page,
         rowsPerPage: pagination.pageSize
+      },
+      headers: {
+        Authorization: `Bearer ${token}`
       }
+
     }).then(response => response.data)
   );
 console.log(data)

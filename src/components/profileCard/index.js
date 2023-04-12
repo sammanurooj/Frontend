@@ -5,9 +5,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function MultiActionAreaCard({ image, title, description }) {
+export default function MultiActionAreaCard({ image, title, description, deleteProject,editProject,previewProject}) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 250 }}>
       <CardActionArea>
         <CardMedia component="img" height="140" image={image} alt={title} 
                sx={{ borderRadius: 2 }}
@@ -22,8 +22,14 @@ export default function MultiActionAreaCard({ image, title, description }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          View Project
+      <Button size="small" color="primary" onClick={deleteProject}>
+          Delete
+        </Button>
+        <Button size="small" color="primary" onClick={editProject}>
+          Edit
+        </Button>
+        <Button size="small" color="primary" onClick={previewProject}>
+          preview
         </Button>
       </CardActions>
     </Card>

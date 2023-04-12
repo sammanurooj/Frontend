@@ -33,9 +33,11 @@ export default function MyAppBar() {
           <CreateIcon />
         </IconButton>
         </Link>
-        <Typography variant="h6" component="div" style={textStyle} >
-          Sign Up
-        </Typography>
+        <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>
+  <Typography variant="h6" component="div" style={textStyle}>
+    Sign up
+  </Typography>
+</Link>
 
         <Link to="/signin">
 
@@ -44,9 +46,13 @@ export default function MyAppBar() {
           <ExitToAppIcon />
         </IconButton>
         </Link>
-        <Typography variant="h6" component="div"  style={textStyle} >
-          Sign In
-        </Typography>
+
+        <Link to="/signin" style={{ textDecoration: 'none', color: 'inherit' }}>
+  <Typography variant="h6" component="div" style={textStyle}>
+    Sign up
+  </Typography>
+</Link>
+        
       </Toolbar>
     </LightAppBar>
     </Container>
