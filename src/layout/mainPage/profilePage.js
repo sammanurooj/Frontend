@@ -26,7 +26,7 @@ function App() {
 <MyAppBar/>
 </Box>
 
-<Box mt={5} >
+<Box mt={5} mr={5} >
 <Profile  />
 </Box>
  

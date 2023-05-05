@@ -15,28 +15,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Card, CardContent } from "@mui/material";
 import { useMutation } from 'react-query';
 import axios from 'axios';
-
+import SaveIcon from '@mui/icons-material/Save';
 
 import { styled } from '@mui/system';
 
 
-const MyComponent2 = styled('div')({
-    color: 'darkslategray',
-    backgroundColor: 'rgb(255 249 249)',
-  
-  marginTop:'24px',
-  marginRight:'550px',
-  marginLeft:'550px',
-    padding:'8px',
-    textAlign:'center',
-   
-    borderRadius:'0.75rem',
-    border:'0px solid',
-    boxShadow:'4',
-    
-  
-    display: 'block',
-  });
+
+
+
 
 
 
@@ -78,23 +64,13 @@ export default function Signup() {
 
 
 
-<MyComponent2 >
-<ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+     
         <Box
-          sx={{
-           
-           
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+          
         >
       
-          <Typography component="h1" variant="h5">
-            Create Project
+          <Typography component="h1" variant="h5" mt={4} sx={{ color: '#777171' }} >
+            Create Project 
           </Typography>
           
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -131,25 +107,24 @@ export default function Signup() {
              
               variant="standard"
             />
-           
+           <Box sx={{ width: '150px'}}>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              size="small"
+              sx={{ fontSize: '12px',marginBottom:"20px", marginTop:"30px" }}
+      startIcon={<SaveIcon />}
             >
             Create Project
             </Button>
-            
+            </Box>
             
           </Box>
         </Box>
         
-      </Container>
-    </ThemeProvider>
+ 
 
-
-</MyComponent2>
 
 
     

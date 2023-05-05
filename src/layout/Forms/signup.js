@@ -22,17 +22,17 @@ import { styled } from '@mui/system';
 
 const MyComponent2 = styled('div')({
     color: 'darkslategray',
-    backgroundColor: 'rgb(255 249 249)',
+    backgroundColor: '#EFE7E7',
   
-  marginTop:'24px',
+  marginTop:'15px',
   marginRight:'550px',
   marginLeft:'550px',
     padding:'8px',
     textAlign:'center',
    
     borderRadius:'0.75rem',
-    border:'0px solid',
-    boxShadow:'4',
+    border:'px solid',
+    boxShadow:'5',
     
   
     display: 'block',
@@ -133,10 +133,7 @@ export default function Signup() {
               autoComplete="current-password"
               variant="standard"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            
             <Button
               type="submit"
               fullWidth

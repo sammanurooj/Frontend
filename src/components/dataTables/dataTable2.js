@@ -7,8 +7,11 @@ import  { useState } from 'react';
 
 import { useQuery } from 'react-query';
 import axios from 'axios';
-
-
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
+import { AppBar, Toolbar } from '@mui/material'; // import the Toolbar component
 
 
 const AuthorRenderer = ({ value }) => (
@@ -28,13 +31,14 @@ export default function DataGridDemo() {
     pageSize: 25,
     page: 0,
   });
-
+  const [projectsearchQuery, projectsetSearchQuery] = useState('');
   const token = localStorage.getItem('this is token');
-  const { isLoading, error, data, isError } = useQuery(['projects',paginationModel], () =>
+  const { isLoading, error, data, isError } = useQuery(['projects',paginationModel,projectsearchQuery], () =>
     axios.get('http://localhost:5000/api/projects/projecttable', {
       params: {
         pagenumber: paginationModel.page,
-        rowsPerPage: paginationModel.pageSize
+        rowsPerPage: paginationModel.pageSize,
+        projectsearchQuery: projectsearchQuery
       },
       headers: {
         Authorization: `Bearer ${token}`
@@ -72,6 +76,41 @@ console.log("table data",data)
   
 
   return (
+
+    <>
+       <Box sx={{ marginBottom: 2, display: 'flex', justifyContent: 'flex-start'}}>
+    <TextField
+  size="medium"
+  label="Search"
+  value={projectsearchQuery}
+  onChange={(event) => projectsetSearchQuery(event.target.value)}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={() => projectsetSearchQuery('')}>
+          <ClearIcon />
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+  sx={{
+    width: '50%', // set the width of the TextField
+    minWidth: '150px', // set a minimum width to avoid the TextField being too small
+    alignSelf: 'flex-start', // align the TextField to the left or top-left corner of the container
+    '& .MuiInputBase-root': {
+      minWidth: '0px', // to allow the field to shrink if needed
+    },
+  }}
+/>
+
+</Box>
+    <AppBar position="static" sx={{backgroundColor: '#1976d2',borderRadius:2}}>
+            <Toolbar>
+              
+              <div>Project Table</div>
+            </Toolbar>
+          </AppBar>
+ 
     <Box sx={{ height: 400, width: '100%' }}>
       {isLoading ? (
         <Typography>Loading...</Typography>
@@ -94,5 +133,6 @@ console.log("table data",data)
 />
       )}
     </Box>
+    </>
   );
 }

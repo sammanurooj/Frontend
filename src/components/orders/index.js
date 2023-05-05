@@ -13,7 +13,7 @@ export default function FolderList() {
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar color="lightpurple">
             <ImageIcon />
           </Avatar>
         </ListItemAvatar>
@@ -21,7 +21,7 @@ export default function FolderList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar color="lightpurple">
             <WorkIcon />
           </Avatar>
         </ListItemAvatar>
@@ -29,7 +29,7 @@ export default function FolderList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar color="lightpurple">
             <BeachAccessIcon />
           </Avatar>
         </ListItemAvatar>
@@ -37,20 +37,20 @@ export default function FolderList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar color="lightpurple">
             <ImageIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="New card added for order #4395133" secondary="Jan 9, 2014" />
       </ListItem>
-      <ListItem>
+      {/* <ListItem>
         <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
+          <Avatar color="#D03232">
+            <ImageIcon  />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
+      </ListItem> */}
     </List>
   );
 }

@@ -12,7 +12,8 @@ export  const theme = createTheme({
       main: '#808080',
     },
     otherColor:{
-      main:"#999"
+      main:"#999",
+      badge:"#F21111"
     }
   }
 })

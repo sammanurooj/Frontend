@@ -12,7 +12,7 @@ import { Container } from '@mui/system';
 import { Link } from 'react-router-dom';
 
 const LightAppBar = styled(AppBar)({
-  backgroundColor: '#f2f2f2',
+  backgroundColor: '#EFE7E7',
   color: '#333',
   alignItems:'center',
 
@@ -49,7 +49,7 @@ export default function MyAppBar() {
 
         <Link to="/signin" style={{ textDecoration: 'none', color: 'inherit' }}>
   <Typography variant="h6" component="div" style={textStyle}>
-    Sign up
+    Sign In
   </Typography>
 </Link>
         

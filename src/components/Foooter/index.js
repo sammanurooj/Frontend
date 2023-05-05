@@ -4,55 +4,42 @@ import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
 
 const Footer = () => {
   const footerStyle = {
-    
-   
 
-    bottom: 0,
-  
-    marginTop:'16px',
     display: 'flex',
     flexDirection: 'row',
-
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '16px',
+    width: '100%',
+    position: 'relative',
+    marginTop: 'auto',
   };
 
   const leftSectionStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    color: '#777',
+    color: '#666',
     fontSize: '14px',
-    
-
-
-    
   };
+
   const rightSectionStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingRight: '16px',
- 
-  
   };
 
   const iconStyle = {
-    color: '#777',
-    marginLeft: '8px',
-    
+    color: '#666',
+    marginLeft: '16px',
   };
 
   return (
-    <>
     <BottomNavigation style={footerStyle}>
       <Box style={leftSectionStyle}>
-        <span>
-          © 2023, made with by Creative Tim for a better web.
-        </span>
+        <span>© 2023, by samman for practice project</span>
       </Box>
-      
-    </BottomNavigation>
-
-    <div style={rightSectionStyle}>
+      <div style={rightSectionStyle}>
         <BottomNavigationAction
           label="Facebook"
           icon={<Facebook style={iconStyle} />}
@@ -70,7 +57,7 @@ const Footer = () => {
           icon={<LinkedIn style={iconStyle} />}
         />
       </div>
-      </>
+    </BottomNavigation>
   );
 };
 

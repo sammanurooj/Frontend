@@ -38,7 +38,7 @@ function App() {
     email:user.email
 
   })) : [];
-  const secondRow = rowsData[3];
+  const secondRow = rowsData[4];
   console.log("data.users", data.data.users.rows);
 console.log("formated data",rowsData[3])
   return (
@@ -46,193 +46,70 @@ console.log("formated data",rowsData[3])
    <>
 
    
-<Container maxWidth="lg" sx={{ height: { xs: '40vh', sm: '50vh', md: '50vh' }, marginTop: { xs: '10px', sm: '20px', md: '30px' }, backgroundImage: 'url("https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg")', backgroundSize: 'cover', borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+<Container maxWidth="lg" sx={{ height: { xs: '40vh', sm: '50vh', md: '45vh' }, marginTop: { xs: '10px', sm: '20px', md: '30px' }, backgroundImage: 'url("https://thumbs.dreamstime.com/b/software-development-business-process-automation-internet-technology-concept-virtual-screen-software-development-143587196.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
        
         </Container>
 
-<Container maxWidth="lg" sx={{ bgcolor: 'rgb(255, 255, 255)', height: { xs: '410vh', sm: '500vh', md: '160vh' } ,borderRadius:'16px',boxShadow: 3 }}>
-
-
-        <Box display ="flex" flexDirection="column"  justifyContent='space-between' >
-
-<Box sx={{
+        <Container maxWidth="lg" sx={{ bgcolor: 'rgb(255, 255, 255)',  height: 'auto', borderRadius:'16px',boxShadow: 3 ,width: '2000px',marginRight:"300px"}} >
+  <Box display="flex" flexDirection="column" justifyContent="space-between">
+    <Box
+      sx={{
         display: 'flex',
-        flexDirection: { xs: 'column',sm:'column' ,md: 'row' },
+        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
         [theme.breakpoints.down('md')]: {
           flexDirection: 'column'
-        }
-      }}>
-        <Box display="flex" flexDirection="column" mt={5}>
-
-        <Box display="flex" flexDirection="column" >
-         
-         <h4>Platform settings</h4>
-
-
-
+        },
+        flexWrap: 'wrap' // Set flexWrap to wrap
+      }}
+    >
+      <Box display="flex" flexDirection="column" mt={5}>
+        <Box display="flex" flexDirection="column" sx={{ color: '#777171' }}>
+          <h4>Platform settings</h4>
         </Box>
-
-
         <Box display="flex" flexDirection="row" ml={4}>
-        
-     
-        <FormGroup>
-    
-        
-      <FormControlLabel control={<Switch defaultChecked />} label=" Email me when someone follows me" />
-      <FormControlLabel control={<Switch defaultChecked />} label="Email me when someone answers on my post" />
-      <FormControlLabel control={<Switch defaultChecked />} label=" Email me when someone mentions me" />
-      
-    </FormGroup>
-
-
- 
+          <FormGroup>
+            <FormControlLabel control={<Switch defaultChecked />} label=" Email me when someone follows me" />
+            <FormControlLabel control={<Switch defaultChecked />} label=" Email me when someone mentions me" />
+          </FormGroup>
         </Box>
-
-        <h4>Application</h4>
-
+        <Box display="flex" flexDirection="column" sx={{ color: '#777171' }}>
+          <h4>Application</h4>
+        </Box>
         <Box display="flex" flexDirection="row" ml={4}>
-
+          <FormGroup>
+            <FormControlLabel control={<Switch defaultChecked />} label="New launches and projects " />
+            <FormControlLabel control={<Switch defaultChecked />} label="Subscribe to newsletter" />
+          </FormGroup>
+        </Box>
+      </Box>
+      <Box display="flex" flexDirection="column" mt={5} ml={30}>
+        <Box display="flex" flexDirection="column" sx={{ color: '#777171' }}>
+          <h4>Profile Information</h4>
+        </Box>
+        <Box style={{ textAlign: 'left', maxWidth: '400px' }}>
+          <p style={{ wordWrap: 'break-word' }}>{secondRow.bio}</p>
+          <p style={{ wordWrap: 'break-word' }}>Full Name: {secondRow.name}</p>
+          <p style={{ wordWrap: 'break-word' }}>Mobile: {secondRow.phone}</p>
+          <p style={{ wordWrap: 'break-word' }}>Email: {secondRow.email}</p>
+          <p style={{ wordWrap: 'break-word' }}>Location: {secondRow.Location}</p>
+        </Box>
        
-        <FormGroup>
+      </Box>
     
-        <FormControlLabel control={<Switch defaultChecked />} label="
-New launches and projects " />
-      <FormControlLabel control={<Switch defaultChecked />} label="Email me when someone answers on my post" />
-      <FormControlLabel control={<Switch defaultChecked />} label=" 
-Subscribe to newsletter" />
+      <Box display="flex" flexDirection="row" justifyContent="space-between" marginBottom={5} sx={{ flexBasis: '100%' }}>
       
-      
-    </FormGroup>
+      <Box sx={{ maxWidth: 'calc(33% - 20px)' }}>
+      <Box display="flex" flexDirection="row" ml={1} sx={{ color: '#777171' }}>
+        <h1>Projects</h1>
+      </Box>
+    <Pcard />
+  </Box>
+      </Box>
+    </Box>
+  </Box>
+</Container>
 
-
- 
-        </Box>
-
-        
-
-     
-
-        </Box>
-
-        <Box display="flex" flexDirection="column" mt={5}>
-
-       
-
-
-     
-        <Box display="flex" flexDirection="column" >
-         
-        <h4>Profile Information</h4>
-
-
-
-        </Box>
-         
-        
-        <div>
-
-        <p>{secondRow.bio}</p>
-    {/* {rowsData[3].length > 0 ? (
-      rowsData[3].map((user) => (
-        <p id={`user-${user.id}`} key={user.id}>
-          {user.name}: {user.bio}
-        </p>
-      ))
-    ) : (
-      <div>No data to display.</div>
-    )} */}
-  </div>
-
-       <Box >
-        <p>Full Name:  
-        {secondRow.name}</p>
-        <p>Mobile:  
-{secondRow.phone}</p>
- <p>Email:  
- {secondRow.email}</p>
- <p>Location:  
- {secondRow.Location}</p>
-       </Box>
-
-        </Box>
-
-
-
-        <Box display="flex" flexDirection="column" mt={5}>
-
-        <Box display="flex" flexDirection="column" >
-         
-        <h4>Conversation</h4>
-
-
-
-        </Box>
-
-       <Box >
-       <TableContainer>
-  <Table sx={{ borderCollapse: 'collapse' }}>
-    <TableBody>
-      {rowsData.map((user) => (
-        <TableRow key={user.id}>
-          <TableCell sx={{ py: 2 }}>
-            <img src={IMage } alt="Profile Icon" style={{ width: '30px', height: '30px' }} />
-            <span style={{ marginLeft: '10px' }}>{user.name}</span>
-          </TableCell>
-          <TableCell sx={{ py: 2 }}>Reply</TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
-       </Box>
-
-        </Box>
-
-        
-
-
-
-        </Box>
-
-        <Button 
-  href="/createproject" 
-  variant="contained" 
-  sx={{ 
-    width: '150px', 
-   
-    textTransform: 'none',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingLeft: '16px'
-  }}
->
-    <AddIcon sx={{ fontSize: '24px'}}/>
-  <span>Create project</span> 
-
-</Button>
-
-<Box display="flex" flexDirection="row" ml={1}>
-<h4>projects</h4>
-<br/>
-
-
-
-</Box>
-
-
-
-<Box display="flex" flexDirection="row" justifyContent='space-between'>
-
-<Pcard/>
-
-
-
-</Box>
-        </Box>
-      </Container>
 
    </>
   )

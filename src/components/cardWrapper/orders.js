@@ -7,10 +7,10 @@ import  OrderList  from '../orders/index'
 const index = () => {
   return (
 
-    <Box sx={{ borderRadius: 2 ,width: { xs: '100%', md: '50%' }}}>
+    <Box sx={{ borderRadius: 3 , marginRight: "35px", width: { xs: '100%', md: '50%' }}}>
   
     <Card>
-    <h4>Orders Review</h4>
+    <h4 style={{marginBottom:"3px"}}>Orders Review</h4>
    
     <CardContent>
     

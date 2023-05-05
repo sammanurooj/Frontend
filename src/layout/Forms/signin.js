@@ -25,7 +25,7 @@ import { styled } from '@mui/system';
 
 const MyComponent2 = styled('div')({
     color: 'darkslategray',
-    backgroundColor: 'rgb(255 249 249)',
+    backgroundColor: '#EFE7E7',
   
   marginTop:'24px',
   marginRight:'550px',
@@ -71,7 +71,7 @@ export default function SignIn() {
       localStorage.setItem('this is token', response.data.token);
   
       alert('Successfully logged in');
-      navigate("/mainpage");
+      navigate("/");
     } catch (error) {
       alert('Invalid email and password');
     }
@@ -123,10 +123,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            
             <Button
               type="submit"
               fullWidth

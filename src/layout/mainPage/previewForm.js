@@ -21,12 +21,13 @@ function App() {
                   
         <Sidebar/>
  </Box>
- <Box display='flex' flexDirection='column'   width = {'50%'} mt={3}>
-<Box display='flex' mb={5}>
+ <Box display='flex' mb={5}>
 <MyAppBar/>
 </Box>
+ <Box    width = {'100%'} mt={5}>
 
-<Box mt={5} >
+
+<Box mt={10}>
 <PreviewForm  />
 </Box>
  

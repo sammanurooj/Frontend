@@ -13,7 +13,7 @@ function App() {
   const theme = useTheme();
   const token = localStorage.getItem('this is token');
   const navigate = useNavigate();
-  const { isLoading, error, data, refetch } = useQuery('cardData', () =>
+  const { isLoading, error, data, refetch } = useQuery('projectcardData', () =>
     axios
       .get('http://localhost:5000/api/userproject/project', {
         headers: {
@@ -51,7 +51,7 @@ function App() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const cardData =
+  const projectcardData =
     data && Array.isArray(data.data.users.rows)
       ? data.data.users.rows.map((user) => ({
           id: user.id,
@@ -78,7 +78,7 @@ function App() {
           },
         }}
       >
-        {cardData.map((rowData) => (
+        {projectcardData.map((rowData) => (
           <Box key={rowData.id}>
             <ProfileCard
               image={rowData.pic}

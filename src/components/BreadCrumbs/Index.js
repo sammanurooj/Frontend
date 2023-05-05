@@ -13,14 +13,14 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 export default function BasicBreadcrumbs() {
   return (
     <div role="presentation" onClick={handleClick} style={{ marginLeft: '250px' }}>
-      <Breadcrumbs aria-label="breadcrumb">
-        <IconButton color="none">
+      <Breadcrumbs aria-label="breadcrumb" color="#808080">>
+        <IconButton color="primary">
           <HouseIcon />
         </IconButton>
-        <Link
+        <Link href="/profile"
           underline="hover"
           color="inherit"
-          href="/material-ui/getting-started/installation/"
+      
         >
           DashBoard
         </Link>

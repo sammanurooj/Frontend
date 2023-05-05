@@ -14,7 +14,17 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
+
+
 import MenuIcon from '@mui/icons-material/Menu';
+
+
+
+
+import PersonIcon from '@mui/icons-material/Person';
+import GroupIcon from '@mui/icons-material/Group';
+import FolderIcon from '@mui/icons-material/Folder';
+
 
 import Toolbar from '@mui/material/Toolbar';
 import {  useNavigate} from 'react-router-dom';
@@ -67,7 +77,7 @@ export default function ResponsiveDrawer(props: Props) {
       <ListItem>
       <ListItemButton Link to="/table">
       <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
+      <GroupIcon  style={{ color: 'white' }} />
 
       </ListItemIcon>
       <ListItemText primary={"Clients"} />
@@ -79,41 +89,13 @@ export default function ResponsiveDrawer(props: Props) {
       </ListItem>
       </List>
 
-      <List>
-      <ListItem>
-      <ListItemButton>
-      <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
-
-      </ListItemIcon>
-      <ListItemText primary={"Billing"} />
-
-      </ListItemButton>
-
-
-
-      </ListItem>
-      </List>
-      <List>
-      <ListItem>
-      <ListItemButton>
-      <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
-
-      </ListItemIcon>
-      <ListItemText primary={"RTL"} />
-
-      </ListItemButton>
-
-
-
-      </ListItem>
-      </List>
+     
+      
       <List>
       <ListItem>
       <ListItemButton Link to="/profile">
       <ListItemIcon>
-      <InboxIcon style={{ color: 'white' }} />
+      <PersonIcon style={{ color: 'white' }} />
 
       </ListItemIcon>
       <ListItemText primary={"Profile"} />
@@ -124,6 +106,23 @@ export default function ResponsiveDrawer(props: Props) {
 
       </ListItem>
       </List>
+
+      <List>
+      <ListItem>
+      <ListItemButton Link to="/projectlist">
+      <ListItemIcon>
+      <FolderIcon style={{ color: 'white' }} />
+
+      </ListItemIcon>
+      <ListItemText primary={"Projects"} />
+
+      </ListItemButton>
+
+
+
+      </ListItem>
+      </List>
+      
       
       {!isLoggedIn && (
       <List>

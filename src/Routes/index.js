@@ -8,10 +8,11 @@ import Signup from '../layout/mainPage/signupPage'
 import Profile from '../layout/mainPage/profilePage'
 import Postdata from '../reactQuerry/postData'
 import Getdata from '../reactQuerry/index'
-import Createproject from '../layout/Forms/createProject';
+import Createproject from '../layout/mainPage/createProject';
 import Auth from '../components/Auth/auth';
 import EditForm from '../layout/mainPage/editForm';
 import PreviewForm from '../layout/mainPage/previewForm'
+import ProjectList from '../layout/mainPage/projectList'
 
 
 const Routing = () => {
@@ -20,10 +21,12 @@ const Routing = () => {
 
       <BrowserRouter>
         <Routes>
-        <Route path="/mainpage" element={<Auth><MainPage/></Auth> }/>
-        <Route path="/" element={<Signin />} />
-        <Route path="/table" element={<Table/>} />
+        <Route path="/" element={<Auth><MainPage/></Auth> }/>
         <Route path="/signin" element={<Signin />} />
+        <Route path="/table" element={<Auth><Table/></Auth>} />
+        <Route path="/projectlist" element={<Auth><ProjectList/></Auth>} />
+
+      
         <Route path="/signup" element={<Signup/>} />
         <Route path="/edit/:id" element={<EditForm/>} />
         <Route path="/preview/:id" element={<PreviewForm />} />

@@ -8,11 +8,29 @@ import CompleteTask from '../../Container/statisticcards/completeTask'
 import Table from '../../components/cardWrapper/index'
 import Order from '../../components/cardWrapper/orders'
 import Footerbar from '../../components/Foooter/index'
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useSpring, animated } from 'react-spring';
+import ProjectCards from '../../Container/profileCard/index';
+import Typed from "react-typed"
 function App() {
+  const themes = createTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 960,
+        lg: 1280,
+        xl: 1920,
+      },
+    },
+  })
   
   const theme = useTheme();
+
+  
+ 
   return (
+    <ThemeProvider theme={themes}>
 <Box sx={{
         display: 'flex',
         flexDirection: { xs: 'column',sm:'column' ,md: 'row' },
@@ -30,10 +48,27 @@ function App() {
 <MyAppBar/>
 </Box>
 
-<Box mt={10} >
-<Card />
-</Box>
+{/* <Box display="flex" flexDirection="row" ml={1} mt={8} sx={{color:"#777171"}} >
+<h1 style={{
+  color: "#777171",
+  textAlign: "center",
  
+}}>
+ Overview
+
+ 
+</h1>
+</Box> */}
+
+<Box mt={10} >
+<Card/>
+</Box>
+
+
+<Box mt={3} >
+<ProjectCards/>
+</Box>
+
  <Box sx={{
             display: 'flex',
             gap:'16px',
@@ -85,6 +120,7 @@ function App() {
 
   
 </Box>
+ </ThemeProvider>
   );
 }
 export default App;
